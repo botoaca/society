@@ -35,8 +35,10 @@ int main() {
             else sm.RemoveMoney(&person, &s, RAND_RANGE(10, 300));
             
             if (person.GetLifetime() >= 50)
-                if (RAND_RANGE(0, 3) == 0)
+                if (RAND_RANGE(0, 19) == 0) {
                     sm.RemovePerson(&s, person.GetId());
+                    continue;
+                }
         }
     
         std::cout << "TOTAL PEOPLE COUNTER: " << s.GetTotalPeopleAmount() << "\n";
