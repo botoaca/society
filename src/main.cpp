@@ -30,15 +30,26 @@ int main() {
         // Life Loop
         for (Person& person : people) {
             person.TickLife();
-            if (RAND_RANGE(0, 1) == 0)
-                sm.AddMoney(&person, &s, RAND_RANGE(175, 715));
-            else sm.RemoveMoney(&person, &s, RAND_RANGE(10, 300));
-            
-            if (person.GetLifetime() >= 50)
-                if (RAND_RANGE(0, 19) == 0) {
+            long personLifetime = person.GetLifetime();
+
+            if (personLifetime < 20) {
+                if (RAND_RANGE(0, 1) == 0)
+                    sm.AddMoney(&person, &s, 50);
+                else sm.RemoveMoney(&person, &s, RAND_RANGE(0, 30));
+            }
+
+            if (personLifetime >= 20) {
+                if (RAND_RANGE(0, 1) == 0)
+                    sm.AddMoney(&person, &s, RAND_RANGE(175, 715));
+                else sm.RemoveMoney(&person, &s, RAND_RANGE(10, 300));
+            }
+
+            if (personLifetime >= 80) {
+                if (RAND_RANGE(0, 9) == 0) {
                     sm.RemovePerson(&s, person.GetId());
                     continue;
                 }
+            }
         }
     
         std::cout << "TOTAL PEOPLE COUNTER: " << s.GetTotalPeopleAmount() << "\n";
